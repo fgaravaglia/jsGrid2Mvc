@@ -1,0 +1,114 @@
+﻿@using Microsoft.AspNetCore.Html;
+@using jsGrid2Mvc;
+@{
+    ViewData["Title"] = "jsGrid Examples";
+}
+@model jsGrid2Mvc.Samples.Models.jsGridSamples.ControllerModel
+
+<div class="text-center">
+    <h1 class="display-4">Grid Filled by Controller Data</h1>
+    <p>Learn about <a href="https://github.com/tabalinas/jsgrid-webapi/blob/master/Views/Home/Index.cshtml">jsGrid</a>.</p>
+</div>
+
+<h3>Sample In-Page</h3>
+<p>From html</p>
+<div class="row">
+    <div class="col-md-12">
+		<div class="d-flex justify-content-center fst-italic border border-info">
+			Centered
+		</div>
+    </div>
+</div>
+<div id="jsGrid"></div>
+<br/>
+<br />
+<p>From MVC helpers</p>
+@(Model.HtmlGrid)
+@section scripts
+{
+    @(Model.JsGrid)
+
+	<script>
+		var testGrid_countries = [
+			{ Name: "", Id: 0 },
+			{ Name: "United States", Id: 1 },
+			{ Name: "Canada", Id: 2 },
+			{ Name: "United Kingdom", Id: 3 }
+		];
+		function updateGrid() { $("#jsGrid").jsGrid("render"); }
+
+		$("#jsGrid").jsGrid({
+			width: "100%",
+			height: "auto",
+			caption: "this is the grid caption",
+			footerrow: true,
+			autoload: true,
+			filtering: true,
+			inserting: true,
+			editing: true,
+			sorting: true,
+			paging: true,
+			pageIndex: 1,
+			pageSize: 20,
+			pageButtonCount: 15,
+			pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount}",
+			pagePrevText: "Prev",
+			pageNextText: "Next",
+			pageFirstText: "First",
+			pageLastText: "Last",
+			pageNavigatorNextText: "...",
+			pageNavigatorPrevText: "...",
+
+			confirmDeleting: true,
+			deleteConfirm: function (item) { return "The item '" + item.name + "' will be removed. Are you sure?"; },
+			noDataContent: "No data found",
+			controller: {
+				loadData: function (filter) {
+					return $.ajax({
+						type: "GET", url: "/api/data", data: filter, headers: { 'Content-Type': 'application/json' }, dataType: "json"
+					});
+				},
+				insertItem: function (item) {
+					$.ajax({
+						type: "POST", url: "/api/data", data: JSON.stringify(item), headers: { 'Content-Type': 'application/json' }, dataType: "json"
+					})
+						.done(function (item) { $("#jsGrid").jsGrid("loadData"); });
+					updateGrid();
+					return item;
+				},
+				updateItem: function (item) {
+					$.ajax({
+						type: "PUT", url: "/api/data/" + item.id, data: JSON.stringify(item), headers: { 'Content-Type': 'application/json' }, dataType: "json"
+					});
+					return item;
+				},
+				deleteItem: function (item) {
+					$.ajax({
+						type: "DELETE", url: "/api/data/" + item.id, headers: { 'Content-Type': 'application/json' }, dataType: "json"
+					})
+						.done(function (item) { alert("done!"); $("#jsGrid").jsGrid("loadData"); });
+					updateGrid();
+					return item;
+				}
+			},
+			onItemDeleting: function (args) {
+				console.log("deleting item...", args.item);
+			},
+			fields: [
+				{ name: "name", type: "text", width: 150, sorting: true, align: "left", title: "Client Name", validate: "required" },
+				{ name: "age", type: "number", width: 50, sorting: true, align: "center" },
+				{ name: "address", type: "text", width: 200, sorting: true, align: "center" },
+				{ name: "country", type: "select", width: 200, sorting: true, align: "center", items: testGrid_countries, valueField: "Id", textField: "Name" },
+				{ name: "married", type: "checkbox", width: 50, sorting: false, align: "center", title: "Is Married" },
+				{ name: "control", type: "control", width: 150, sorting: false, align: "right", title: "Actions" }
+			],
+
+			loadIndication: true,
+			loadIndicationDelay: 500,
+			loadMessage: "Please, wait...",
+			loadShading: true,
+			updateOnResize: true
+		});
+	</script>
+}
+

@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="http://js-grid.com/getting-started/">jsGrid</a>.</p>
+</div>
+
+<table border="1">
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Go to sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Simple Grid with static Data</td>
+            <td>This example creates a grid loaded by static data stored on the page</td>
+            <td>
+                <a asp-controller="jsGridSamples" asp-action="StaticData">Go to example</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Editable Grid with controller Data</td>
+            <td>This example creates a grid filled with data coming from API controller</td>
+            <td>
+                <a asp-controller="jsGridSamples" asp-action="ControllerData">Go to example</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
