@@ -11,7 +11,7 @@ namespace jsGrid2Mvc.Tests.JavascriptCompiler
 	/// <summary>
 	/// Orginal source from http://madskristensen.net/post/Verify-JavaScript-syntax-using-C.aspx
 	/// </summary>
-	public class JavaScriptCompiler
+	public class JsCompiler
 	{
 		#region Private fields
 
@@ -74,7 +74,7 @@ namespace jsGrid2Mvc.Tests.JavascriptCompiler
 		/// Compiles the specified Javascript files.
 		/// </summary>
 		/// <param name="files">The absolute file paths to .js files.</param>
-		public IDictionary<string, JavascriptCompilerResult> Compile(params string[] files)
+		public static IDictionary<string, JavascriptCompilerResult> Compile(params string[] files)
 		{
 			var compilerResults = new Dictionary<string, JavascriptCompilerResult>();
 
@@ -96,7 +96,7 @@ namespace jsGrid2Mvc.Tests.JavascriptCompiler
 			return compilerResults;
 		}                          
 
-		public JavascriptCompilerResult Compile(string source)
+		public JavascriptCompilerResult CompileSource(string source)
 		{
 		    var result = NUglify.Uglify.Js(source);
 			var javascriptCompilerResult = new JavascriptCompilerResult();

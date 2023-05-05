@@ -1,11 +1,4 @@
 ﻿using jsGrid2Mvc.Model;
-using jsGrid2Mvc.Model.Extensions;
-using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -106,7 +99,6 @@ namespace jsGrid2Mvc.Rendering
                 script.AppendLine("\t],").AppendLine();
             }
 
-            //script.AppendLine("\tpageLoading: true,");
             script.AppendLine("\tloadIndication: true,");
             script.AppendLine("\tloadIndicationDelay: 500,");
             script.AppendLine("\tloadMessage: \"Please, wait...\",");
@@ -178,7 +170,7 @@ namespace jsGrid2Mvc.Rendering
 			script.Append(", " + ConvertBooleanOptionToJs("autosearch", col.IsSearchingEnabled));
 
 			// TO sort number filed in right way, I need to specify the sorter type. see http://js-grid.com/docs/#grid-fields
-			if (col.IsSortingEnabled && col.ColumnType == Column.ColumnTypesEnum.number)
+			if (col.IsSortingEnabled && col.ColumnType == Column.EnumColumnTypes.number)
                 script.Append(", sorter: \"number\"");
 
             
@@ -191,7 +183,7 @@ namespace jsGrid2Mvc.Rendering
             if (!String.IsNullOrEmpty(col._Validate))
                 script.Append(", ").Append(ConvertStringOptionToJs("validate", col._Validate));
 
-            if (col.ColumnType == Column.ColumnTypesEnum.select)
+            if (col.ColumnType == Column.EnumColumnTypes.select)
             {
                 script.Append(", ").Append("items: " + col.RefCollectionName)
                     .Append(", ").Append(ConvertStringOptionToJs("valueField", col.RefCollectionValueId))

@@ -1,9 +1,5 @@
 ﻿using jsGrid2Mvc.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace jsGrid2Mvc.Rendering
 {
@@ -25,7 +21,6 @@ namespace jsGrid2Mvc.Rendering
             // Create javascript
             var script = new StringBuilder();
 
-            //script.AppendLine("\tpagerContainer: null");
             script.AppendLine("\tpageIndex: " + this._Settings.PageIndex.ToString() + ", ");
             script.AppendLine("\tpageSize: " + this._Settings.PageSize.ToString() + ", ");
             if(this._Settings.ButtonCount.HasValue)
@@ -39,12 +34,6 @@ namespace jsGrid2Mvc.Rendering
             script.Append('\t').Append(ConvertStringOptionToJs("pageNavigatorPrevText", this._Settings.NavigatorPrevText)).Append(',').AppendLine();
 
             return script.ToString();
-        }
-
-
-        static string ConvertBooleanOptionToJs(string key, bool value)
-        {
-            return $"{key}: {value.ToString().ToLowerInvariant()}";
         }
 
         static string ConvertStringOptionToJs(string key, string value)

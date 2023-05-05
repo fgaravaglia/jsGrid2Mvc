@@ -20,7 +20,7 @@ namespace jsGrid2Mvc.Model
         /// <summary>
         /// Type of data managed by the column
         /// </summary>
-        public ColumnTypesEnum ColumnType{ get; private set; }
+        public EnumColumnTypes ColumnType{ get; private set; }
         /// <summary>
         /// 
         /// </summary>
@@ -40,7 +40,7 @@ namespace jsGrid2Mvc.Model
         /// <summary>
         /// 
         /// </summary>
-        public ColumnAlignEnum? Align{ get; private set; }
+        public EnumColumnAlign? Align{ get; private set; }
         /// <summary>
         /// For <see cref="ColumnTypesEnum.select"/> column, the name of collection that is used to pickup the right value
         /// </summary>
@@ -77,7 +77,7 @@ namespace jsGrid2Mvc.Model
                 throw new ArgumentNullException(nameof(width));
             this.ControlId = name;
             this.Width = width;
-            this.ColumnType = ColumnTypesEnum.text;
+            this.ColumnType = EnumColumnTypes.text;
             this._Validate = "";
             this.Title = String.IsNullOrEmpty(title) ? "" : title;
 
@@ -92,7 +92,7 @@ namespace jsGrid2Mvc.Model
         /// <summary>
         /// Supported types of column
         /// </summary>
-        public enum ColumnTypesEnum
+        public enum EnumColumnTypes
         { 
             text,
             number,
@@ -103,7 +103,7 @@ namespace jsGrid2Mvc.Model
         /// <summary>
         /// Supported alignment
         /// </summary>
-        public enum ColumnAlignEnum
+        public enum EnumColumnAlign
         { 
             left,
             center,
@@ -144,7 +144,7 @@ namespace jsGrid2Mvc.Model
         /// <returns></returns>
 		public Column AsControl()
         {
-            this.ColumnType = ColumnTypesEnum.control;
+            this.ColumnType = EnumColumnTypes.control;
             NotSearchable();
             return this;
         }
@@ -154,7 +154,7 @@ namespace jsGrid2Mvc.Model
         /// <returns></returns>
         public Column AsText()
         {
-            this.ColumnType = ColumnTypesEnum.text;
+            this.ColumnType = EnumColumnTypes.text;
             return this;
         }
         /// <summary>
@@ -163,7 +163,7 @@ namespace jsGrid2Mvc.Model
         /// <returns></returns>
         public Column AsNumber()
         {
-            this.ColumnType = ColumnTypesEnum.number;
+            this.ColumnType = EnumColumnTypes.number;
             return this;
         }
         /// <summary>
@@ -172,7 +172,7 @@ namespace jsGrid2Mvc.Model
         /// <returns></returns>
         public Column AsCheckBox()
         {
-            this.ColumnType = ColumnTypesEnum.checkbox;
+            this.ColumnType = EnumColumnTypes.checkbox;
             return this;
         }
         /// <summary>
@@ -192,7 +192,7 @@ namespace jsGrid2Mvc.Model
             if (String.IsNullOrEmpty(textValueField))
                 throw new ArgumentNullException(nameof(textValueField));
 
-            this.ColumnType = ColumnTypesEnum.select;
+            this.ColumnType = EnumColumnTypes.select;
             this.RefCollectionName = refCollectionName;
             this.RefCollectionValueId = valueIdField;
             this.RefCollectionTextField = textValueField;
@@ -203,7 +203,7 @@ namespace jsGrid2Mvc.Model
         /// </summary>
         /// <param name="align"></param>
         /// <returns></returns>
-        public Column AlignOn(ColumnAlignEnum align)
+        public Column AlignOn(EnumColumnAlign align)
         {
             this.Align = align;
             return this;

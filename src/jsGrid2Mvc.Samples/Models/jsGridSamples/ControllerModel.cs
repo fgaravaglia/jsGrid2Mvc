@@ -30,12 +30,12 @@ namespace jsGrid2Mvc.Samples.Models.jsGridSamples
 				.FromConfiguration(config)
 				.UseController("/api/data")
 				.UseReferencedCollection("testGrid_countries", "[\r\n        { Name: \"\", Id: 0 },\r\n        { Name: \"United States\", Id: 1 },\r\n        { Name: \"Canada\", Id: 2 },\r\n        { Name: \"United Kingdom\", Id: 3 }\r\n    ]")
-				   .AddColumn(new Column("name", "150", title: "Client Name").AsText().Required().Sortable().AlignOn(Column.ColumnAlignEnum.left))
-				   .AddColumn(new Column("age", "50").AsNumber().Sortable().AlignOn(Column.ColumnAlignEnum.center))
-				   .AddColumn(new Column("address", "200").AsText().Sortable().AlignOn(Column.ColumnAlignEnum.center))
-				   .AddColumn(new Column("country", "200").AsSelect("testGrid_countries", "Id", "Name").Sortable().AlignOn(Column.ColumnAlignEnum.center))
-				   .AddColumn(new Column("married", "50", title: "Is Married").AsCheckBox().AlignOn(Column.ColumnAlignEnum.center))
-				   .AddColumn(new Column("control", "150", title: "Actions").AsControl().AlignOn(Column.ColumnAlignEnum.right))
+				   .AddColumn(new Column("name", "150", title: "Client Name").AsText().Required().Sortable().AlignOn(Column.EnumColumnAlign.left))
+				   .AddColumn(new Column("age", "50").AsNumber().Sortable().AlignOn(Column.EnumColumnAlign.center))
+				   .AddColumn(new Column("address", "200").AsText().Sortable().AlignOn(Column.EnumColumnAlign.center))
+				   .AddColumn(new Column("country", "200").AsSelect("testGrid_countries", "Id", "Name").Sortable().AlignOn(Column.EnumColumnAlign.center))
+				   .AddColumn(new Column("married", "50", title: "Is Married").AsCheckBox().AlignOn(Column.EnumColumnAlign.center))
+				   .AddColumn(new Column("control", "150", title: "Actions").AsControl().AlignOn(Column.EnumColumnAlign.right))
 			   .Editable(true, true, confirmOnDelete: true, confirmDeleteMessage: deleteConfirmFunction);
 			this._Grid = grid;
 		}

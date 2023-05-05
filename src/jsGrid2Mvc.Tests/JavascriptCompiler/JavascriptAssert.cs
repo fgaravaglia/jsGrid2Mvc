@@ -6,20 +6,20 @@ namespace jsGrid2Mvc.Tests.JavascriptCompiler
 {
     public class JavascriptVerifier
     {
-        readonly JavaScriptCompiler JavascriptCompiler;
+        readonly JsCompiler JavascriptCompiler;
 
         public JavascriptVerifier()
         { 
-            this.JavascriptCompiler = new JavaScriptCompiler();
+            this.JavascriptCompiler = new JsCompiler();
         }
 
         public void IsValid(string javascript, List<string> ignoreRuleCodes)
         {
-            JavascriptCompiler.AddIgnoreRules(ignoreRuleCodes);
+            this.JavascriptCompiler.AddIgnoreRules(ignoreRuleCodes);
 
-            var result = JavascriptCompiler.Compile(javascript);
+            var result = this.JavascriptCompiler.CompileSource(javascript);
 
-            JavascriptCompiler.RemoveIgnoreRules(ignoreRuleCodes);
+            this.JavascriptCompiler.RemoveIgnoreRules(ignoreRuleCodes);
 
             var errors = string.Join(", ", result.Errors.Select(x => $"line: {x.StartLine}:{x.EndLine}, column: {x.StartColumn}:{x.EndColumn}, error: {x.Message}, code: {x.ErrorCode}"));
             Assert.That(result.IsValid, Is.True,  $"Validated Script:\n{javascript}\nError(s) while compiling: {errors}");          
