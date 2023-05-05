@@ -13,6 +13,13 @@ dotnet add package jsGrid2Mvc
 
 ## Status
 
+[![Build Status](https://garaproject.visualstudio.com/UmbrellaFramework/_apis/build/status%2Ffgaravaglia.jsGrid2Mvc?repoName=fgaravaglia%2FjsGrid2Mvc&branchName=main)](https://garaproject.visualstudio.com/UmbrellaFramework/_build/latest?definitionId=91&repoName=fgaravaglia%2FjsGrid2Mvc&branchName=main)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jsGrid2Mvc&metric=bugs)](https://sonarcloud.io/summary/new_code?id=jsGrid2Mvc)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jsGrid2Mvc&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=jsGrid2Mvc)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jsGrid2Mvc&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=jsGrid2Mvc)
+
+
 ## Requirements
 To use jsGrid2Mvc you have to install in you web application:
 - Bootstap > 5.2: see XXXXXX
